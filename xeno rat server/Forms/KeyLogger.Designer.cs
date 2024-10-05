@@ -38,6 +38,7 @@ namespace xeno_rat_server.Forms
             // 
             // listView1
             // 
+            this.listView1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
             this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1});
             this.listView1.FullRowSelect = true;
@@ -60,6 +61,7 @@ namespace xeno_rat_server.Forms
             // 
             // textBox1
             // 
+            this.textBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
             this.textBox1.Location = new System.Drawing.Point(12, 173);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
@@ -70,9 +72,10 @@ namespace xeno_rat_server.Forms
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(356, 157);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.label1.Location = new System.Drawing.Point(348, 152);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(43, 13);
+            this.label1.Size = new System.Drawing.Size(56, 17);
             this.label1.TabIndex = 2;
             this.label1.Text = "keylogs";
             this.label1.Click += new System.EventHandler(this.label1_Click);
@@ -91,11 +94,13 @@ namespace xeno_rat_server.Forms
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.listView1);
+            this.ForeColor = System.Drawing.SystemColors.Control;
             this.Name = "KeyLogger";
             this.Text = "KeyLogger";
             this.Load += new System.EventHandler(this.KeyLogger_Load);

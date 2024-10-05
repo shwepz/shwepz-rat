@@ -30,6 +30,7 @@ using System.Net;
 using System.ComponentModel.Composition;
 using MaxMind.GeoIP2;
 using MaxMind.GeoIP2.Responses;
+using xeno_rat_server.Properties;
 
 namespace xeno_rat_server
 {
@@ -57,7 +58,8 @@ namespace xeno_rat_server
         {
             
             InitializeComponent();
-            this.Text = "Xeno-rat: Created by moom825 - version 1.8.7";
+            listView2_ClientSizeChanged(this, EventArgs.Empty);
+            this.Text = "Shwepz-rat: Created by shw3pz - version 1.0.0";
             key = Utils.CalculateSha256Bytes(string_key);
 
             ListeningHandler =new Listener(OnConnect);
@@ -116,6 +118,42 @@ namespace xeno_rat_server
             Commands["Client"] = Client;
             Commands["Power"] = Power;
             Commands["Debug Info"] = Debug_Info;
+        }
+
+        private void tabControl1_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            Graphics g = e.Graphics;
+            Brush textBrush;
+            Brush backgroundBrush;
+
+            // Проверка, выбрана ли вкладка
+            if (e.Index == this.tabControl1.SelectedIndex)
+            {
+                backgroundBrush = new SolidBrush(Color.FromArgb(45, 45, 48)); // Темный фон для выбранной вкладки
+                textBrush = new SolidBrush(Color.White);  // Белый текст
+            }
+            else
+            {
+                backgroundBrush = new SolidBrush(Color.FromArgb(28, 28, 28)); // Темный фон для невыбранной вкладки
+                textBrush = new SolidBrush(Color.LightGray);  // Серый текст для неактивных вкладок
+            }
+
+            // Заполнение фона вкладки
+            g.FillRectangle(backgroundBrush, e.Bounds);
+
+            // Рисование текста с эмодзи
+            string tabText = this.tabControl1.TabPages[e.Index].Text;
+            Font tabFont = new Font("Segoe UI Emoji", 13F, FontStyle.Regular, GraphicsUnit.Point); // Шрифт с поддержкой эмодзи
+            Rectangle paddedBounds = e.Bounds;
+            paddedBounds.Inflate(-2, -2);  // Уменьшение границ для текста
+            g.DrawString(tabText, tabFont, textBrush, paddedBounds);
+
+            // Отрисовка границ вкладок (для акцента)
+            g.DrawRectangle(Pens.Black, e.Bounds);
+
+            // Освобождение ресурсов
+            backgroundBrush.Dispose();
+            textBrush.Dispose();
         }
 
         private async Task OnConnect(Socket socket)
@@ -1694,8 +1732,19 @@ namespace xeno_rat_server
 
         private void listView2_ClientSizeChanged(object sender, EventArgs e)
         {
+            Image originalImage = Resources.fsociety_dark_logo_4k_0s_2560x1700;
 
+            // Проверка, чтобы не было ошибок при отсутствии изображения
+            if (originalImage != null)
+            {
+                // Масштабируем изображение под текущий размер ListView
+                Bitmap resizedImage = new Bitmap(originalImage, listView2.ClientSize.Width, listView2.ClientSize.Height);
+
+                // Устанавливаем масштабированное изображение как фон для ListView
+                listView2.BackgroundImage = resizedImage;
+            }
         }
+
 
         private void tabPage5_Click(object sender, EventArgs e)
         {
@@ -1810,6 +1859,11 @@ namespace xeno_rat_server
         private void checkBox4_CheckedChanged(object sender, EventArgs e)
         {
             LogErrors = checkBox4.Checked;
+        }
+
+        private void tabPage4_Click(object sender, EventArgs e)
+        {
+
         }
     }
     public static class IconInjector
